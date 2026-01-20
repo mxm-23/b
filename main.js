@@ -49,7 +49,7 @@ new Chart(ctx, {
     y: {
       beginAtZero: true,
       max: 80,          // ① 压顶
-      ticks: { stepSize: 5 } // ② 每格 5 单位，格子就密了
+      ticks: { stepSize: 10 } // ② 每格 10 单位，格子就密了
     }
   }
 }

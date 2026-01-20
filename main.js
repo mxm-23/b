@@ -42,9 +42,14 @@ new Chart(ctx, {
     ]
   },
   options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: { title: { display: true, text: '逐小时环境监测' } },
-    scales: { y: { beginAtZero: true } }
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: { title: { display: true, text: '逐小时环境监测' } },
+  scales: {
+    y: {
+      beginAtZero: true,
+      max: 80,          // ① 压顶
+      ticks: { stepSize: 5 } // ② 每格 5 单位，格子就密了
+    }
   }
-});
+}

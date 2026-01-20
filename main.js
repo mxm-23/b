@@ -1,6 +1,5 @@
 /*******************************************************
- * 1. 原始数据：复制自用户提供的表格
- *    格式：hour,temperature,humidity,pm25
+ * 1. 原始数据
  ******************************************************/
 const csv = `hour,temperature,humidity,pm25
 0,18.2,65,35
@@ -12,13 +11,13 @@ const csv = `hour,temperature,humidity,pm25
 12,26.4,48,58`;
 
 /*******************************************************
- * 2. 解析 CSV → 数组
+ * 2. 解析
  ******************************************************/
-const lines  = csv.trim().split('\n').slice(1); // 去掉表头
-const labels = [];   // X 轴文字
-const temp   = [];   // 温度
-const humid  = [];   // 湿度
-const pm25   = [];   // PM2.5
+const lines  = csv.trim().split('\n').slice(1);
+const labels = [];
+const temp   = [];
+const humid  = [];
+const pm25   = [];
 
 lines.forEach(line => {
   const [h, t, hu, p] = line.split(',').map(Number);
@@ -29,7 +28,7 @@ lines.forEach(line => {
 });
 
 /*******************************************************
- * 3. 画柱状图
+ * 3. 画图
  ******************************************************/
 const ctx = document.getElementById('barChart');
 new Chart(ctx, {
@@ -37,42 +36,15 @@ new Chart(ctx, {
   data: {
     labels,
     datasets: [
-      {
-        label: '温度 ℃',
-        data: temp,
-        backgroundColor: '#FF6384',
-        borderRadius: 4
-      },
-      {
-        label: '湿度 %',
-        data: humid,
-        backgroundColor: '#36A2EB',
-        borderRadius: 4
-      },
-      {
-        label: 'PM2.5 μg/m³',
-        data: pm25,
-        backgroundColor: '#FFCE56',
-        borderRadius: 4
-      }
+      { label: '温度 ℃', data: temp, backgroundColor: '#FF6384', borderRadius: 4 },
+      { label: '湿度 %',  data: humid, backgroundColor: '#36A2EB', borderRadius: 4 },
+      { label: 'PM2.5 μg/m³', data: pm25, backgroundColor: '#FFCE56', borderRadius: 4 }
     ]
   },
   options: {
     responsive: true,
     maintainAspectRatio: false,
-    plugins: {
-      legend: { position: 'top' },
-      tooltip: {
-        callbacks: {
-          label(ctx) {
-            return ctx.dataset.label + '：' + ctx.parsed.y;
-          }
-        }
-      }
-    },
-    scales: {
-      x: { grid: { display: false } },
-      y: { beginAtZero: true }
-    }
+    plugins: { title: { display: true, text: '逐小时环境监测' } },
+    scales: { y: { beginAtZero: true } }
   }
 });

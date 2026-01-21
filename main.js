@@ -42,14 +42,21 @@ new Chart(ctx, {
     ]
   },
   options: {
-  responsive: true,
-  maintainAspectRatio: false,
-  plugins: { title: { display: true, text: '逐小时环境监测' } },
-  scales: {
-    y: {
-      beginAtZero: true,
-      max: 80,          // ① 压顶
-      ticks: { stepSize: 10 } // ② 每格 10 单位，格子就密了
-    }
+    responsive: true,
+    maintainAspectRatio: false,   // 允许自由设置高宽比
+    plugins: { title: { display: true, text: '逐小时环境监测' } },
+    scales: {
+      x: { grid: { display: false } },               // 横坐标简洁
+      y: {
+        beginAtZero: true,
+        max: 80,                                    // ① 压顶
+        ticks:  { stepSize: 10 },                   // ② 格子密
+        grid: { drawBorder: false }                 // 可选：去掉顶部边框
+      }
+    },
+    // ③ 关键：把画布整体压扁，纵坐标自然比横坐标短
+    layout: { padding: { top: 10, bottom: 10 } },
+    // ④ 手动设置高宽比（宽 > 高）
+    aspectRatio: 2.5   // 数字越大图越“扁”，纵坐标越短
   }
-}
+});

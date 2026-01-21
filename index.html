@@ -6,14 +6,17 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     body{margin:0;padding:2rem;background:#f7f9fc;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif}
-    #box{max-width:900px;margin:auto;background:#fff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.05);padding:2rem}
-    h1{text-align:center;font-size:1.4rem;color:#333;margin-bottom:1.5rem}
+    /* 整体盒子：限宽 + 限高，让图纵向变矮 */
+    #box{max-width:900px;max-height:300px;margin:auto;background:#fff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.05);padding:1.5rem;display:flex;flex-direction:column}
+    h1{text-align:center;font-size:1.4rem;color:#333;margin:0 0 1rem}
+    /* canvas 本身再压一层高度 */
+    #barChart{flex:1;max-height:220px}
   </style>
 </head>
 <body>
   <div id="box">
     <h1>逐小时环境监测（温度 / 湿度 / PM2.5）</h1>
-    <canvas id="barChart" height="50"></canvas>
+    <canvas id="barChart"></canvas>
   </div>
   <script type="module" src="./main.js"></script>
 </body>
